@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
 /*1.Написати програму яка видаляє з колекції цілих чисел всі дублікати, якщо вони є.
@@ -13,25 +14,18 @@ public class Main {
 
         Random random = new Random();
 
-        int size = 100;
+        int size = 20;
         int count = 0;
 
         ArrayList<Integer> numbers = new ArrayList<Integer>();
 
-        for (int i = 0; i < size; i++) {
-
-            numbers.add(random.nextInt(50));
-        }
-
-
-        ArrayList<Integer> numbers2 = new ArrayList<Integer>();
 
         for (int i = 0; i < size; i++) {
 
-            numbers2.add(random.nextInt(50));
-
+            numbers.add(random.nextInt(10));
         }
 
+        List<Integer> numbers2 = numbers.stream().distinct().collect(Collectors.toList());
 
         for (int var : numbers) {
 
@@ -39,50 +33,35 @@ public class Main {
 
         }
 
-        System.out.println();
-
-        for (int var2 : numbers2) {
-
-            System.out.print(var2 + "  ");
-
-        }
+        System.out.println("");
 
         for (int i = 0; i < numbers.size(); i++) {
+            for (int j = i+1; j < numbers.size() && i < numbers.size(); j++) {
 
-            for (int j = 0; j < numbers2.size() && i < numbers.size(); j++) {
-
-                if (numbers.get(i) == numbers2.get(j)) {
+                if (numbers.get(i) == numbers.get(j)) {
                     count++;
+                    //numbers.remove(j);
                     numbers.remove(i);
-                    numbers2.remove(j);
+                    j = i;
+
                 }
 
             }
-
         }
 
-        System.out.println("Count " + count);
 
-        if (count > 0) {
 
-            for (int var : numbers) {
+            System.out.println(numbers + "Counted dublicates " + count);
 
-                System.out.print(var + "  ");
+            System.out.println(numbers2);
 
-            }
 
-            System.out.println();
-
-            for (int var2 : numbers2) {
-
-                System.out.print(var2 + "  ");
-
-            }
         }
 
     }
 
-}
+
+
 
 
 
